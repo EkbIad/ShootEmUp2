@@ -20,7 +20,7 @@ namespace ShootEmUp
         Vector2 rockScale;
         bool alive;
 
-        public Enemies(Texture2D rockTex, )
+        public Enemies(Texture2D rockTex)
         {
             
             rockRect = new Rectangle();
