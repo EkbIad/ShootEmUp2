@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="BackgroundManager.cs" />
     <Compile Include="Bullet.cs" />
+    <Compile Include="BulletManager.cs" />
     <Compile Include="Enemies.cs" />
     <Compile Include="EnemySpawner.cs" />
     <Compile Include="Game1.cs" />

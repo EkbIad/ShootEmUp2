@@ -16,15 +16,25 @@ namespace ShootEmUp
         float speed;
         Texture2D texture;
         Rectangle rectangle;
-       
+        
         Vector2 position;
+
+        public Vector2 AccessPosition { get => position; }
+
         Vector2 scale;
         Vector2 offset;
-       
 
+        public Rectangle AccessRectangle { get => rectangle; }
+
+        bool myIsPlayer;
+
+        public bool AccessIsPlayer { get => myIsPlayer; }
         
         float damage;
-        public Bullet(Vector2 Bulletdir, float bulletSpeed, Texture2D bulletTexture, Vector2 startPosition, float bulletDamage)
+
+        public float AccessDamage { get => damage; }
+
+        public Bullet(Vector2 Bulletdir, float bulletSpeed, Texture2D bulletTexture, Vector2 startPosition, float bulletDamage, bool isPlayer = true)
         {
             
             dir = Bulletdir;
@@ -38,8 +48,9 @@ namespace ShootEmUp
             scale = new Vector2(0.03f, 0.03f);
             offset = texture.Bounds.Size.ToVector2() * 0.2f;
             rectangle.Size = (texture.Bounds.Size.ToVector2().ToPoint());
-           
+            damage = 1;
 
+            myIsPlayer = isPlayer;
 
 
         }
@@ -48,19 +59,31 @@ namespace ShootEmUp
         {
             position += dir * speed * deltaTime;
             rectangle.Location = position.ToPoint();
-            if (rectangle.Intersects(Enemies.rockRect))
-            {
-                Enemies.ChangeRockColor(Color.Red);
-
-                Game1.RemoveBullet(this);
+            //if (rectangle.Intersects(Enemies.rockRect))
+            //{
+            //    Enemies.ChangeRockColor(Color.Red);
                 
-            }
-            else
-            {
-                Enemies.ChangeRockColor(Color.White);
-            }
+
+            //    //Game1.RemoveBullet(this);
+                
+            //}
+            //else
+            //{
+            //    Enemies.ChangeRockColor(Color.White);
+            //}
             
 
+        }
+
+        public float Damage(Rectangle otherRectangle)
+        {
+            float damageToDeal = 0;
+            if (rectangle.Intersects(otherRectangle))
+            {
+                damageToDeal = damage;
+                //Game1.RemoveBullet(this);
+            }
+            return damageToDeal;
         }
 
         public void Draw(SpriteBatch spriteBatch)
